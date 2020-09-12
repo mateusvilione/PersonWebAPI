@@ -11,6 +11,14 @@ namespace PersonWebAPI.Controllers
     [Route("v1/person")]
     public class PersonController : ControllerBase
     {
+        [HttpGet]
+        [Route("")]
+        public async Task<ActionResult<List<Person>>> Index([FromServices] DataContext context)
+        {
+            var people = await context.People.ToListAsync();
+            return people;
+        }
+
         [HttpPost]
         [Route("")]
         public async Task<ActionResult<Person>> Store(

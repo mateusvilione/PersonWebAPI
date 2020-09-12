@@ -25,8 +25,13 @@ namespace PersonWebAPI.Controllers
         [Route("{id:int}")]
         public async Task<ActionResult<Person>> Show([FromServices] DataContext context, int id)
         {
-            var people = await context.People.FindAsync(id);
-            return people;
+            var person = await context.People.FindAsync(id);
+
+            if (person == null) {
+                return NotFound();
+            }
+
+            return person;
         }
 
         [HttpPost]

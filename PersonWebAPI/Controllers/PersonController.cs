@@ -51,5 +51,25 @@ namespace PersonWebAPI.Controllers
                 return BadRequest(ModelState);
             }
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<Person>> Update(
+            [FromServices] DataContext context,
+            [FromBody] Person person,
+            int id)
+        {
+            var exist = context.People.Any(x => x.Id == id);
+
+            if (exist && ModelState.IsValid)
+            {
+                context.Entry<Person>(person).State = EntityState.Modified;
+                await context.SaveChangesAsync();
+                return person;
+            }
+            else
+            {
+                return NotFound(ModelState);
+            }
+        }
     }
 }

@@ -15,11 +15,11 @@ namespace PersonWebAPI.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "O campo CPF é obrigatório", AllowEmptyStrings = false)]
-        [StringLength(14, MinimumLength = 14, ErrorMessage = "O CPF deve ter 14 caracteres")]
+        [StringLength(11, MinimumLength = 11, ErrorMessage = "O CPF deve ter 11 caracteres")]
         public string Cpf { get; set; }
 
         [Required(ErrorMessage = "O campo Data de Nascimento é obrigatório")]
-        [DisplayFormat(DataFormatString = "mm/dd/yyyy")]
+        [DisplayFormat(DataFormatString = "yyyy-mm-dd")]
         public DateTime DataBirth { get; set; }
 
         [Required(ErrorMessage = "O campo País de Nascimento é obrigatório", AllowEmptyStrings = false)]

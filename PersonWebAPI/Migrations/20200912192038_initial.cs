@@ -15,7 +15,7 @@ namespace PersonWebAPI.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 255, nullable: false),
-                    Cpf = table.Column<string>(maxLength: 14, nullable: false),
+                    Cpf = table.Column<string>(maxLength: 11, nullable: false),
                     DataBirth = table.Column<DateTime>(nullable: false),
                     ContryBirth = table.Column<string>(maxLength: 100, nullable: false),
                     StateBirth = table.Column<string>(maxLength: 100, nullable: false),

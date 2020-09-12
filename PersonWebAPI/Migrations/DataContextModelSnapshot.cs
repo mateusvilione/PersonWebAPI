@@ -35,8 +35,8 @@ namespace PersonWebAPI.Migrations
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasColumnType("varchar(14)")
-                        .HasMaxLength(14);
+                        .HasColumnType("varchar(11)")
+                        .HasMaxLength(11);
 
                     b.Property<DateTime>("DataBirth")
                         .HasColumnType("datetime");

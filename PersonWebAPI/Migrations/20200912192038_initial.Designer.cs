@@ -9,7 +9,7 @@ using PersonWebAPI.Data;
 namespace PersonWebAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200912183147_initial")]
+    [Migration("20200912192038_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,8 +37,8 @@ namespace PersonWebAPI.Migrations
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasColumnType("varchar(14)")
-                        .HasMaxLength(14);
+                        .HasColumnType("varchar(11)")
+                        .HasMaxLength(11);
 
                     b.Property<DateTime>("DataBirth")
                         .HasColumnType("datetime");

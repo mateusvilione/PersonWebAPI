@@ -4,6 +4,8 @@ using PersonWebAPI.Data;
 using PersonWebAPI.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
+
 
 namespace PersonWebAPI.Controllers
 {
@@ -16,6 +18,14 @@ namespace PersonWebAPI.Controllers
         public async Task<ActionResult<List<Person>>> Index([FromServices] DataContext context)
         {
             var people = await context.People.ToListAsync();
+            return people;
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<ActionResult<Person>> Show([FromServices] DataContext context, int id)
+        {
+            var people = await context.People.FindAsync(id);
             return people;
         }
 

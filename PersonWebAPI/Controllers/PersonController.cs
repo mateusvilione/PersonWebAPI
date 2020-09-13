@@ -71,5 +71,25 @@ namespace PersonWebAPI.Controllers
                 return NotFound(ModelState);
             }
         }
+
+        [Route("{id:int}")]
+        [HttpDelete]
+        public async Task<ActionResult<Person>> Destroy([FromServices] DataContext context, int id)
+        {
+            var person = await context.People.FindAsync(id);
+
+            if (person != null)
+            {
+                context.People.Remove(person);
+                await context.SaveChangesAsync();
+
+                return person;
+            }
+            else {
+                return NotFound();
+            }
+        }
     }
 }
+
+

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using System;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using PersonWebAPI.ViewModels.PersonViewModels;
 
 namespace PersonWebAPI.Controllers
@@ -61,13 +60,26 @@ namespace PersonWebAPI.Controllers
         [Route("")]
         public async Task<ActionResult<Person>> Store(
             [FromServices] DataContext context,
-            [FromBody] Person model)
+            [FromBody] CreatePersonViewModel person)
         {
             if (ModelState.IsValid)
             {
-                context.People.Add(model);
+                var newPerson = new Person
+                {
+                    Name = person.Name,
+                    Cpf = person.Cpf,
+                    DataBirth = person.DataBirth,
+                    ContryBirth = person.ContryBirth,
+                    StateBirth = person.StateBirth,
+                    CityBirth = person.CityBirth,
+                    FatherName = person.FatherName,
+                    MotherName = person.MotherName,
+                    Email = person.Email
+                };
+
+                context.People.Add(newPerson);
                 await context.SaveChangesAsync();
-                return model;
+                return newPerson;
             }
             else
             {
@@ -119,5 +131,3 @@ namespace PersonWebAPI.Controllers
         }
     }
 }
-
-

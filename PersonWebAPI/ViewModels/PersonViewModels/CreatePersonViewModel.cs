@@ -1,15 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Configuration;
 
-namespace PersonWebAPI.Models
+namespace PersonWebAPI.ViewModels.PersonViewModels
 {
-    public class Person
+    public class CreatePersonViewModel
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required(ErrorMessage = "O campo Nome é obrigatório", AllowEmptyStrings = false)]
         [StringLength(255, ErrorMessage = "O campo Nome deve ter no máximo 255 caracteres")]
         public string Name { get; set; }

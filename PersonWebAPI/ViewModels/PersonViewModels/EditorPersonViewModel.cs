@@ -4,8 +4,6 @@ namespace PersonWebAPI.ViewModels.PersonViewModels
 {
     public class EditorPersonViewModel
     {
-        public int Id { get; set; }
-
         [Required(ErrorMessage = "O campo Nome é obrigatório", AllowEmptyStrings = false)]
         [StringLength(255, ErrorMessage = "O campo Nome deve ter no máximo 255 caracteres")]
         public string Name { get; set; }   

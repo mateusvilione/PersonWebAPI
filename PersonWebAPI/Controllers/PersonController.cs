@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using PersonWebAPI.ViewModels.PersonViewModels;
 
 namespace PersonWebAPI.Controllers
 {
@@ -77,16 +78,21 @@ namespace PersonWebAPI.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult<Person>> Update(
             [FromServices] DataContext context,
-            [FromBody] Person person,
+            [FromBody] EditorPersonViewModel person,
             int id)
         {
-            var exist = context.People.Any(x => x.Id == id);
+            var editPerson = context.People.Find(id); ;
 
-            if (exist && ModelState.IsValid)
+            if (editPerson != null && ModelState.IsValid)
             {
-                context.Entry<Person>(person).State = EntityState.Modified;
+                editPerson.Name = person.Name;
+                editPerson.FatherName = person.FatherName;
+                editPerson.MotherName = person.MotherName;
+                editPerson.Email = person.Email;
+
+                context.Entry<Person>(editPerson).State = EntityState.Modified;
                 await context.SaveChangesAsync();
-                return person;
+                return editPerson;
             }
             else
             {

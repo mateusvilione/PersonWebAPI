@@ -10,7 +10,7 @@ namespace PersonWebAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
     [Migration("20200912192038_initial")]
-    partial class initial
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

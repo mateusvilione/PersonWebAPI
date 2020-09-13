@@ -5,7 +5,8 @@ using PersonWebAPI.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
-
+using System;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace PersonWebAPI.Controllers
 {
@@ -15,9 +16,30 @@ namespace PersonWebAPI.Controllers
     {
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult<List<Person>>> Index([FromServices] DataContext context)
+        public async Task<ActionResult<List<Person>>> Index(
+            [FromServices] DataContext context,
+            [FromQuery] string? name = null,
+            [FromQuery] string? cpf = null,
+            [FromQuery] string? dataBirth = null,
+            [FromQuery] string? contryBirth = null,
+            [FromQuery] string? stateBirth = null,
+            [FromQuery] string? cityBirth = null)
         {
             var people = await context.People.ToListAsync();
+
+            if (name != null)
+                people = people.Where(x => x.Name.Contains(name)).ToList();
+            if (cpf != null)
+                people = people.Where(x => x.Cpf.Contains(cpf)).ToList();
+            if (dataBirth != null)
+                people = people.Where(x => x.DataBirth == DateTime.Parse(dataBirth)).ToList();
+            if (contryBirth != null)
+                people = people.Where(x => x.ContryBirth.Contains(contryBirth)).ToList();
+            if (stateBirth != null)
+                people = people.Where(x => x.StateBirth.Contains(stateBirth)).ToList();
+            if (cityBirth != null)
+                people = people.Where(x => x.CityBirth.Contains(cityBirth)).ToList();
+            
             return people;
         }
 

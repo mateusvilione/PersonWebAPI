@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PersonWebAPI.Data;
@@ -11,6 +12,7 @@ using PersonWebAPI.ViewModels.PersonViewModels;
 
 namespace PersonWebAPI.Controllers
 {
+    [EnableCors("MyPolicy")]
     [ApiController]
     [Route("v1/person")]
     public class PersonController : ControllerBase
